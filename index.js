@@ -1,43 +1,57 @@
 class Subject {
-    constructor(subject) {
-        this.subject = [subject];
+    constructor(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
     }
 }
 
 class Student {
-    constructor({name, surname, group, school, grade}) {
+    constructor(name, surname, group, school, grade) {
         this.name = name;
         this.surname = surname;
         this.group = group;
         this.school = school;
-        this.class = grade;
+        this.grade = grade;
+    }
+
+    getFullName() {
+        return `${this.name} ${this.surname}`;
     }
 }
 
 class Diary {
-    constructor(diary, student = null, subject) {
-        this.diary = diary;
+    constructor(student) {
         this.student = student;
-        this.subject = subject;
-        this.grade = [];
+        this.subjects = [];
+        this.grades = [];
     }
 
     addSubject(subject) {
-        this.subject.subject.push(subject);
+        this.subjects.push(subject);
     }
 
-    deleteSubject(subject) {
-        this.subject = this.subject.subject.filter(item => item != subject);
+    removeSubject(subjectName) {
+        this.subjects = this.subjects.filter(sub => sub.getName() !== subjectName);
     }
 
-    addGrade({subject, grade, date}) {
-        this.grade.push({subject, grade, date});
+    addGrade(subject, grade, date) {
+        this.grades.push({subject: subject.getName(), grade, date});
+    }
+
+    getGrades(subjectName) {
+        return this.grades.filter(grade => grade.subject === subjectName);
     }
 }
 
+
 let math = new Subject("Math");
-let Baha = new Student({name: "Baha", surname: "Kirkorov", group: "m3", school: "70", grade: 9});
-let diaryOfBaha = new Diary("Дневник 1", Baha, math);
-diaryOfBaha.addSubject("chemistry");
-diaryOfBaha.addGrade({subject: "chemistry", grade: 5, date: "14/03/2023"});
-console.log(diaryOfBaha);
+let baha = new Student("Baha", "Kirkorov", "m3", "70", 9);
+let diaryOfBaha = new Diary(baha);
+
+diaryOfBaha.addSubject(math);
+diaryOfBaha.addGrade(math, 5, "14/03/2023");
+
+console.log(diaryOfBaha.getGrades("Math")); 
