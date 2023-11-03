@@ -17,8 +17,9 @@ class Student {
         this.grade = grade;
     }
 
-    getFullName() {
-        return `${this.name} ${this.surname}`;
+
+    getFullInfo() {
+        return `${this.name} ${this.surname} учится в ${this.grade}${this.group} в ${this.school} школе`;
     }
 }
 
@@ -55,3 +56,5 @@ diaryOfBaha.addSubject(math);
 diaryOfBaha.addGrade(math, 5, "14/03/2023");
 
 console.log(diaryOfBaha.getGrades("Math")); 
+console.log(baha.getFullInfo())
+
